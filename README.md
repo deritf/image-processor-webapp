@@ -4,7 +4,6 @@
 These instructions are intended for use with **Laragon**, but you can also run the application in other local development environments such as **XAMPP**, or similar setups that support PHP and Composer.
 
 ## REQUIREMENTS
----------------
 - Laragon installed on your system (with Apache and PHP)
 - Visual Studio Code (or another editor with terminal support)
 - PHP 8.1 or higher
@@ -12,14 +11,12 @@ These instructions are intended for use with **Laragon**, but you can also run t
 - Internet access for initial installation
 
 ## PROJECT LOCATION
--------------------
 1. Copy the entire project folder to the following Laragon directory: C:\laragon\www\
 
 2. It should be located like this: C:\laragon\www\image-processor-webapp\
 (For XAMPP: `C:\xampp\htdocs\image-processor-webapp\`)
 
 ## INSTALLING DEPENDENCIES
---------------------------
 1. Open Visual Studio Code and load the project folder as a workspace:
 
 2. Open the terminal (`Ctrl + ñ` or via `Terminal > New Terminal` menu)
@@ -29,7 +26,6 @@ These instructions are intended for use with **Laragon**, but you can also run t
 This will install the required dependencies in the `vendor/` folder.
 
 ## RUNNING THE APPLICATION
---------------------------
 1. Open Laragon and make sure Apache is running.
 
 2. In your browser, go to: http://localhost/image-processor-webapp/
@@ -42,5 +38,4 @@ This will install the required dependencies in the `vendor/` folder.
 
 
 ## Autor
---------------------
 Derimán Tejera
