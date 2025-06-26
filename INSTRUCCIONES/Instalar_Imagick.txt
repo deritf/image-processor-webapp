@@ -1,0 +1,104 @@
+============================================================
+INSTALACIÓN DE IMAGICK EN LARAGON (WINDOWS)
+============================================================
+
+Esta guía te ayudará a instalar correctamente la extensión 
+Imagick para PHP en tu entorno local con Laragon.
+
+------------------------------------------------------------
+1. COMPROBAR CONFIGURACIÓN ACTUAL DE PHP
+------------------------------------------------------------
+
+Abre la terminal de Laragon y ejecuta los siguientes comandos:
+
+    php -i | findstr "PHP Version"
+    php -i | findstr "Compiler Architecture Thread"
+
+Ejemplo de salida esperada:
+
+    PHP Version => 8.3.16
+    Compiler => Visual C++ 2019
+    Architecture => x64
+    Thread Safety => enabled
+
+Anota estos valores. Son necesarios para elegir la descarga correcta.
+
+    PHP VERSION      → Ej: 8.3
+    ARCHITECTURE     → x64 o x86
+    THREAD SAFETY    → enabled = TS / disabled = NTS
+    COMPILER         → VS16 o VC15 (normalmente VS16 para PHP ≥8)
+
+------------------------------------------------------------
+2. DESCARGAR EXTENSIÓN IMAGICK COMPATIBLE
+------------------------------------------------------------
+
+1. Accede a: 
+   https://windows.php.net/downloads/pecl/releases/imagick/
+
+2. Entra en la carpeta de versión más reciente (por ejemplo 3.7.0)
+
+3. Descarga el archivo .zip que coincida con tus valores:
+
+   Formato del nombre del archivo:
+   php_imagick-[versión]-[php]-[ts|nts]-[vc]-[x64|x86].zip
+
+   Ejemplo compatible:
+   php_imagick-3.7.0-8.3-ts-vs16-x64.zip
+
+------------------------------------------------------------
+3. COPIAR ARCHIVOS EN LARAGON
+------------------------------------------------------------
+
+1. Extrae el .zip descargado.
+
+2. Copia `php_imagick.dll` a:
+   C:\laragon\bin\php\php-8.3.x\ext
+
+3. Copia TODOS los archivos `.dll` restantes (como CORE_RL_*.dll, etc.) a:
+   C:\laragon\bin\php\php-8.3.x\
+
+------------------------------------------------------------
+4. ACTIVAR IMAGICK EN php.ini
+------------------------------------------------------------
+
+1. Abre el archivo:
+   C:\laragon\bin\php\php-8.3.x\php.ini
+
+2. Añade la siguiente línea (si no existe ya):
+
+    extension=imagick
+
+------------------------------------------------------------
+5. REINICIAR LARAGON
+------------------------------------------------------------
+
+Haz clic derecho en el icono de Laragon > "Restart All"
+
+------------------------------------------------------------
+6. VERIFICAR INSTALACIÓN
+------------------------------------------------------------
+
+Método A: En terminal de Laragon
+
+    php -m | findstr imagick
+
+→ Si ves "imagick", está correctamente instalado.
+
+Método B: Crear archivo "phpinfo.php" con:
+
+    <?php phpinfo();
+
+→ Ábrelo en el navegador. Deberías ver una sección "imagick".
+
+------------------------------------------------------------
+¿PROBLEMAS COMUNES?
+------------------------------------------------------------
+
+- Asegúrate de que las versiones coinciden exactamente.
+- Verifica que editaste el `php.ini` correcto.
+- Asegúrate de reiniciar Laragon.
+- Copia todos los `.dll` a la carpeta raíz del PHP en Laragon.
+
+------------------------------------------------------------
+FIN DE INSTRUCCIONES
+============================================================

@@ -1,0 +1,61 @@
+:root {
+  /* Tipografías */
+  --fuente-principal: "Inter", sans-serif;
+  --fuente-ui: "JetBrains Mono", monospace;
+
+  /* Colores generales */
+  --color-fondo: #f1f3f8;
+  --color-superficie: #ffffff;
+  --color-superficie-suave: #f6f8fc;
+  --color-texto: #333333;
+  --color-placeholder: #aaaaaa;
+  --color-acento: #ff4a4a;
+  --color-acento-hover: #ff7474;
+  --color-desactivado: #cccccc;
+
+  /* Sombras Neomórficas */
+  --sombra-neu-externa: 8px 8px 16px rgba(0, 0, 0, 0.2),
+    -8px -8px 16px rgba(255, 255, 255, 0.45);
+  --sombra-neu-interna: inset 4px 4px 8px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.4);
+  --sombra-suave: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --sombra-hover: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  /* Bordes redondeados */
+  --radio-pequeno: 0.4rem;
+  --radio-mediano: 0.8rem;
+  --radio-grande: 1.2rem;
+  --radio-total: 9999px;
+  --radio-circular: 50%;
+
+  /* Espaciado */
+  --espaciado-xs: 0.4rem;
+  --espaciado-sm: 0.8rem;
+  --espaciado-md: 1.6rem;
+  --espaciado-lg: 2.4rem;
+  --espaciado-xl: 4rem;
+
+  /* Tamaños de fuente */
+  --texto-xs: 1.2rem;
+  --texto-sm: 1.4rem;
+  --texto-md: 1.6rem;
+  --texto-lg: 2rem;
+  --texto-xl: 2.4rem;
+  --texto-xxl: 3.2rem;
+
+  /* Tamaños de iconos */
+  --icono-sm: 1.2rem;
+  --icono-md: 2rem;
+  --icono-lg: 3.2rem;
+
+  /* Pesos tipografías */
+  --peso-base: 400;
+  --peso-negrita: 600;
+
+  /* Transiciones */
+  --transicion-base: 0.3s ease;
+  --transicion-suave: 0.3s ease-in-out;
+
+  /* Otros */
+  --ancho-maximo-formulario: 700px;
+}

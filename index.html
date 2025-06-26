@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Conversor de Imágenes</title>
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/fonts.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <link rel="icon" href="assets/icons/fabicon.png" type="image/png" />
+  </head>
+  <body>
+    <header class="encabezado">
+      <div class="titulo-app">
+        Conversor de Imágenes
+        <p>
+          Coloca tus imágenes en la carpeta <code>/INPUT</code> y selecciona el
+          formato y calidad deseada para convertirlas. El resultado se guardará
+          en <code>/OUTPUT</code>.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="contenedor">
+        <div class="campo doble">
+          <!-- INPUT -->
+          <div class="bloque-carpeta">
+            <button type="button" class="boton-carpeta" data-carpeta="INPUT">
+              Abrir carpeta INPUT
+            </button>
+            <div class="info-carpeta">
+              <p>
+                <img src="assets/icons/icon-peso.png" alt="Peso" />
+                <span id="tamano-input">—</span>
+              </p>
+              <p>
+                <img src="assets/icons/icon-archivos.png" alt="Archivos" />
+                <span id="archivos-input">—</span>
+              </p>
+              <p>
+                <img
+                  src="assets/icons/icon-fecha.png"
+                  alt="Última modificación"
+                />
+                <span id="modificacion-input">—</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- OUTPUT -->
+          <div class="bloque-carpeta">
+            <button type="button" class="boton-carpeta" data-carpeta="OUTPUT">
+              Abrir carpeta OUTPUT
+            </button>
+            <div class="info-carpeta">
+              <p>
+                <img src="assets/icons/icon-peso.png" alt="Peso" />
+                <span id="tamano-output">—</span>
+              </p>
+              <p>
+                <img src="assets/icons/icon-archivos.png" alt="Archivos" />
+                <span id="archivos-output">—</span>
+              </p>
+              <p>
+                <img
+                  src="assets/icons/icon-fecha.png"
+                  alt="Última modificación"
+                />
+                <span id="modificacion-output">—</span>
+              </p>
+            </div>
+            <div class="campo campo-borrar">
+              <button
+                id="limpiar-output"
+                class="boton-borrar"
+                title="Limpiar carpeta OUTPUT"
+              >
+                <img src="assets/icons/icon-borrar.png" alt="Icono papelera" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <form action="procesar.php" method="POST">
+          <!-- Formato -->
+          <div class="campo">
+            <label for="formato">Formato de salida:</label>
+            <select name="formato" id="formato" required>
+              <option value="webp">WebP</option>
+              <option value="jpg">JPG</option>
+              <option value="png">PNG</option>
+            </select>
+          </div>
+
+          <!-- Calidad -->
+          <div class="campo">
+            <label for="calidad">Calidad (1–100%):</label>
+            <input
+              type="number"
+              id="calidad"
+              name="calidad"
+              min="1"
+              max="100"
+              value="85"
+              required
+            />
+          </div>
+
+          <!-- Redimensionar -->
+          <fieldset class="subcampo">
+            <legend>Redimensionar</legend>
+            <div class="campo doble">
+              <div>
+                <label for="resize_width">Ancho (px):</label>
+                <input
+                  type="number"
+                  id="resize_width"
+                  name="resize_width"
+                  min="1"
+                  placeholder="Ej: 800"
+                />
+              </div>
+              <div>
+                <label for="resize_height">Alto (px):</label>
+                <input
+                  type="number"
+                  id="resize_height"
+                  name="resize_height"
+                  min="1"
+                  placeholder="Ej: 600"
+                />
+              </div>
+            </div>
+            <small class="nota-proporcion">
+              IMPORTANTE: Puedes dejar uno de los dos valores en blanco para
+              mantener la proporción.
+            </small>
+          </fieldset>
+
+          <!-- Motor de procesamiento -->
+          <div class="campo">
+            <label for="driver">Motor de procesamiento:</label>
+            <select name="driver" id="driver" required>
+              <option value="gd">GD</option>
+              <option value="imagick">Imagick</option>
+            </select>
+          </div>
+
+          <!-- Botón para desplegar mostrar opciones avanzadas -->
+          <div class="campo">
+            <button type="button" id="toggle-edicion">
+              Opciones avanzadas
+            </button>
+          </div>
+
+          <!-- Opciones de edición de imagen -->
+          <fieldset class="campo" id="edicion-avanzada" style="display: none">
+            <legend>Opciones de edición (avanzadas)</legend>
+
+            <!-- Herramienta recorte -->
+            <fieldset class="subcampo">
+              <legend>Recorte</legend>
+              <div class="campo doble">
+                <div>
+                  <label for="crop_w">Ancho del recorte (px):</label>
+                  <input
+                    type="number"
+                    name="crop_w"
+                    id="crop_w"
+                    min="1"
+                    placeholder="Ej: 300"
+                  />
+                </div>
+                <div>
+                  <label for="crop_h">Alto del recorte (px):</label>
+                  <input
+                    type="number"
+                    name="crop_h"
+                    id="crop_h"
+                    min="1"
+                    placeholder="Ej: 300"
+                  />
+                </div>
+              </div>
+              <div class="campo doble">
+                <div>
+                  <label for="crop_x">Posición X (px):</label>
+                  <input
+                    type="number"
+                    name="crop_x"
+                    id="crop_x"
+                    min="0"
+                    placeholder="Opcional"
+                  />
+                </div>
+                <div>
+                  <label for="crop_y">Posición Y (px):</label>
+                  <input
+                    type="number"
+                    name="crop_y"
+                    id="crop_y"
+                    min="0"
+                    placeholder="Opcional"
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Ajustes visuales -->
+            <fieldset class="subcampo">
+              <legend>Ajustes visuales</legend>
+
+              <div class="campo">
+                <label for="brightness">Brillo (-100 a 100):</label>
+                <input
+                  type="number"
+                  id="brightness"
+                  name="brightness"
+                  min="-100"
+                  max="100"
+                  step="1"
+                  placeholder="0"
+                />
+              </div>
+
+              <div class="campo">
+                <label for="contrast">Contraste (-100 a 100):</label>
+                <input
+                  type="number"
+                  id="contrast"
+                  name="contrast"
+                  min="-100"
+                  max="100"
+                  step="1"
+                  placeholder="0"
+                />
+              </div>
+
+              <div class="campo">
+                <label for="gamma">Gamma (0.1 a 10):</label>
+                <input
+                  type="number"
+                  id="gamma"
+                  name="gamma"
+                  step="0.1"
+                  min="0.1"
+                  max="10"
+                  placeholder="1.0"
+                />
+              </div>
+
+              <div class="campo">
+                <label for="blur">Desenfoque (radio en px):</label>
+                <input
+                  type="number"
+                  id="blur"
+                  name="blur"
+                  min="1"
+                  max="100"
+                  placeholder="0"
+                />
+              </div>
+
+              <div class="campo">
+                <label for="sharpen">Nitidez (1 a 100):</label>
+                <input
+                  type="number"
+                  id="sharpen"
+                  name="sharpen"
+                  min="1"
+                  max="100"
+                  placeholder="0"
+                />
+              </div>
+
+              <div class="campo">
+                <label for="greyscale">Escala de grises:</label>
+                <select id="greyscale" name="greyscale">
+                  <option value="">No</option>
+                  <option value="1">Sí</option>
+                </select>
+              </div>
+
+              <div class="campo">
+                <label for="colorize">Tinte (rojo, verde, azul):</label>
+                <input
+                  type="number"
+                  name="colorize_r"
+                  placeholder="R (0–255)"
+                  min="0"
+                  max="255"
+                />
+                <input
+                  type="number"
+                  name="colorize_g"
+                  placeholder="G (0–255)"
+                  min="0"
+                  max="255"
+                />
+                <input
+                  type="number"
+                  name="colorize_b"
+                  placeholder="B (0–255)"
+                  min="0"
+                  max="255"
+                />
+              </div>
+            </fieldset>
+
+            <!-- Efectos y filtros -->
+            <fieldset class="subcampo">
+              <legend>Efectos y filtros</legend>
+
+              <div class="campo">
+                <label for="invert">Invertir colores:</label>
+                <select name="invert" id="invert">
+                  <option value="">No</option>
+                  <option value="1">Sí</option>
+                </select>
+              </div>
+
+              <div class="campo">
+                <label for="opacity">Opacidad (0–100%):</label>
+                <input
+                  type="number"
+                  id="opacity"
+                  name="opacity"
+                  min="0"
+                  max="100"
+                  placeholder="100"
+                />
+              </div>
+
+              <div class="campo">
+                <label for="pixelate">Pixelado (tamaño en px):</label>
+                <input
+                  type="number"
+                  id="pixelate"
+                  name="pixelate"
+                  min="1"
+                  max="100"
+                  placeholder="0"
+                />
+              </div>
+            </fieldset>
+
+            <!-- Rotación e inversión de imágenes -->
+            <fieldset class="subcampo">
+              <legend>Otras modificaciones</legend>
+              <div class="campo">
+                <label for="rotate">Rotar (grados):</label>
+                <input
+                  type="number"
+                  id="rotate"
+                  name="rotate"
+                  placeholder="Ej: 90"
+                />
+              </div>
+              <div class="campo">
+                <label for="flip">Invertir imagen:</label>
+                <select id="flip" name="flip">
+                  <option value="">Sin inversión</option>
+                  <option value="h">Invertir horizontalmente</option>
+                  <option value="v">Invertir verticalmente</option>
+                </select>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <!-- Botón de envío -->
+          <div class="campo">
+            <button type="submit">Convertir imágenes de /INPUT</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Desarrollado con
+        <span class="icono-wrapper">
+          <span id="changing-icon" class="icono-changing">❤️</span>
+        </span>
+        por
+        <a href="https://github.com/deritf" target="_blank">Derimán Tejera</a>
+      </p>
+    </footer>
+    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/desarrollado-por.js"></script>
+  </body>
+</html>

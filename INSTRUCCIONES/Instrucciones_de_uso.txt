@@ -1,0 +1,69 @@
+INSTRUCCIONES DE USO DE LA APLICACIÓN DE CONVERSIÓN DE IMÁGENES
+================================================================
+
+Estas instrucciones están pensadas para su uso en LARAGON, pero también puedes utilizar la aplicación en otros entornos de desarrollo local como XAMPP, MAMP o similares que soporten PHP y Composer.
+
+REQUISITOS
+----------
+- Laragon instalado en tu equipo (con Apache y PHP)
+- Visual Studio Code (u otro editor con terminal)
+- PHP 8.1 o superior
+- Composer (gestor de dependencias para PHP)
+- Acceso a internet para la instalación inicial
+
+UBICACIÓN DEL PROYECTO
+-----------------------
+1. Copia esta carpeta completa en el siguiente directorio de Laragon:
+
+   C:\laragon\www\
+
+2. Debe quedar como:
+
+   C:\laragon\www\Aplicacion-conversor-imagenes\
+
+(En XAMPP sería: C:\xampp\htdocs\Aplicacion-conversor-imagenes\)
+
+INSTALACIÓN DE DEPENDENCIAS
+---------------------------
+1. Abre Visual Studio Code y selecciona la carpeta del proyecto como espacio de trabajo:
+   
+   C:\laragon\www\Aplicacion-conversor-imagenes\
+
+2. Abre la terminal (`Ctrl + ñ` o desde el menú `Terminal > Nueva terminal`)
+
+3. Escribe y ejecuta el siguiente comando:
+
+   composer install
+
+   Esto instalará las dependencias necesarias en la carpeta `vendor/`.
+
+EJECUCIÓN DE LA APLICACIÓN
+--------------------------
+1. Abre Laragon y asegúrate de que Apache está iniciado.
+
+2. Accede desde el navegador a:
+
+   http://localhost/Aplicacion-conversor-imagenes/
+
+3. Ya puedes usar la aplicación. Recuerda:
+
+   - Coloca tus imágenes en la carpeta `INPUT/`
+   - Elige el formato de salida, calidad y las opciones de edición que necesites
+   - Pulsa el botón para procesar
+   - Las imágenes convertidas se guardarán en la carpeta `OUTPUT/`
+
+ESTRUCTURA BÁSICA
+-----------------
+Aplicacion-conversor-imagenes/
+├── assets/             → Archivos CSS y fuentes
+├── INPUT/              → Carpeta donde debes poner tus imágenes originales
+├── OUTPUT/             → Aquí se guardarán las imágenes convertidas
+├── index.html          → Interfaz de usuario
+├── procesar.php        → Lógica de conversión
+├── limpiar-output.php  → Borra imágenes generadas
+├── abrir-carpeta.php   → Abre la carpeta OUTPUT localmente (en Windows)
+├── composer.json       → Dependencias
+├── vendor/             → Se crea automáticamente al instalar con Composer
+
+-------------------------------------
+Autor: Derimán Tejera Fumero
